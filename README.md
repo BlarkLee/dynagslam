@@ -1,1 +1,1 @@
-# dynagslam.github.io
+# splatsdf.io.github
