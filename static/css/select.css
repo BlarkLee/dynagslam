@@ -34,3 +34,9 @@ justify-content: center; /* align horizontal */
 align-items: center; /* for center of your page */
 height:100%; /* give it's height*/
 }
+
+.img-spacing {
+    margin-bottom: 100px;  /* Adds space below the image */
+    display: block;        /* Ensures the image does not affect text flow */
+    max-width: 100%;       /* Makes sure image resizes properly */
+}

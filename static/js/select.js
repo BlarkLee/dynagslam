@@ -1,12 +1,18 @@
-var currentSceneList = ["lego", "ship"];
-var currentScene = "lego";
+var currentSceneList = ["tum", "bonn"]; //["lego", "ship"];
+var currentScene = "tum"; //"lego";
 var currentSceneId = 0;
 
-var currentEpoch = "500";
+var currentEpoch = "walking_xyz"; //"500";
 var currentEpochId = 0;
+/*
 const sceneButtonTextsVideo = {
-  0: ["500", "1000", "1500", "2000", "3000"], // Lego
-  1: ["500", "1000", "2000", "4000", "5000"], // Ship
+  0: ["500", "1500", "3000"], // Lego
+  1: ["1000", "2000", "5000"], // Ship
+};*/
+
+const sceneButtonTextsVideo = {
+  0: ["walking_xyz", "walking_static", "walking_rpy", "walking_halfsphere"], //tum
+  1: ["balloon", "balloon2", "ps_track", "ps_track2"], //bonn
 };
 
 var currentEpochImage = "500";
@@ -15,6 +21,83 @@ const sceneButtonTextsImage = {
   0: ["500", "1000", "1500", "2000", "2500", "3000"], // Lego
   1: ["500", "1000", "1500", "2500", "3500", "5000"], // Ship
 };
+
+document.addEventListener("DOMContentLoaded", function () {
+  let video = document.getElementById("video_tum");
+  let progressBar = document.getElementById("video_progress_tum");
+  let playPauseBtn = document.getElementById("play_pause_btn_tum");
+  let video_bonn = document.getElementById("video_bonn");
+  let progressBar_bonn = document.getElementById("video_progress_bonn");
+  let playPauseBtn_bonn = document.getElementById("play_pause_btn_bonn");
+
+  // ✅ Update progress bar as the video plays
+  video.addEventListener("timeupdate", function () {
+      if (!progressBar.dragging) {
+          progressBar.max = video.duration;
+          progressBar.value = video.currentTime;
+      }
+  });
+  video_bonn.addEventListener("timeupdate", function () {
+    if (!progressBar_bonn.dragging) { // Only update when not dragging
+      progressBar_bonn.max = video_bonn.duration;
+      progressBar_bonn.value = video_bonn.currentTime;
+  }
+});
+
+  // ✅ Enable dragging to seek video
+  progressBar.addEventListener("input", function () {
+      progressBar.dragging = true;
+  });
+  progressBar_bonn.addEventListener("input", function () {
+    progressBar_bonn.dragging = true;  // Prevent automatic updates while dragging
+});
+
+  progressBar.addEventListener("change", function () {
+      video.currentTime = progressBar.value;
+      progressBar.dragging = false;
+  });
+
+  progressBar_bonn.addEventListener("change", function () {
+    video_bonn.currentTime = progressBar_bonn.value;
+    progressBar_bonn.dragging = false;  // Resume updates after seeking
+});
+
+  // ✅ Play/Pause button functionality
+  playPauseBtn.addEventListener("click", function () {
+      if (video.paused) {
+          video.play();
+          playPauseBtn.textContent = "Pause";  // Update button text
+      } else {
+          video.pause();
+          playPauseBtn.textContent = "Play";  // Update button text
+      }
+  });
+  playPauseBtn_bonn.addEventListener("click", function () {
+    if (video_bonn.paused) {
+      video_bonn.play();
+      playPauseBtn_bonn.textContent = "Pause";  // Update button text
+  } else {
+      video_bonn.pause();
+      playPauseBtn_bonn.textContent = "Play";  // Update button text
+  }
+});
+
+  // ✅ Update button text when video is paused
+  video.addEventListener("pause", function () {
+      playPauseBtn.textContent = "Play";
+  });
+  video_bonn.addEventListener("pause", function () {
+    playPauseBtn_bonn.textContent = "Play";
+  });
+
+  video.addEventListener("play", function () {
+      playPauseBtn.textContent = "Pause";
+  });
+  video_bonn.addEventListener("play", function () {
+    playPauseBtn_bonn.textContent = "Pause";
+});
+});
+
 
 function ChangeScene(idx){
   var li_list = document.getElementById("scene-result-view-ul").children;
@@ -105,21 +188,84 @@ function ChangeScene(idx){
 
 }
 // adjusted from ChangeResult
-function ChangeEpoch(idx){
+function ChangeEpoch(sceneid, idx){
   var li_list = document.getElementById("video-result-view-ul").children;
   for(i = 0; i < li_list.length; i++){
       li_list[i].className = "";
   }
   li_list[idx].className = "active";
 
+  console.log("currentSceneId:", currentSceneId);
+  console.log("idx:", idx);
+
+  let video = document.getElementById("video_tum");
+  let progressBar = document.getElementById("video_progress_tum");
+
+  let previousTime = video.currentTime;  // Save the current playback time
+  console.log("Previous Time:", previousTime);
+
+  currentSceneId = sceneid
   currentEpoch= sceneButtonTextsVideo[currentSceneId][idx];
   currentEpochId = idx;
-  let video = document.getElementById("video_scene")
+  console.log("currentEpoch:", currentEpoch);
+  console.log("currentEpochId:", currentEpochId);
+  //let video = document.getElementById("video_scene")
   old_src = video.src;
+  console.log("Old Video Source:", old_src);  // Print old src
   new_scr = old_src.split('/');
   new_scr[new_scr.length-1] = currentEpoch + ".mp4";
   new_video_dir = new_scr.join('/');
   video.src = new_video_dir;
+
+  video.onloadedmetadata = function () {
+    video.currentTime = 0; //previousTime;  // Restore playback position
+    progressBar.value = 0; //previousTime;  // Sync progress bar
+    progressBar.max = video.duration;  // Update progress bar range
+    video.play();  // Auto-play the new video 
+  };
+
+  console.log("New Video Source:", new_video_dir);
+
+}
+
+function ChangeEpoch2(sceneid, idx){
+  var li_list = document.getElementById("video-result-view-ul-bonn").children;
+  for(i = 0; i < li_list.length; i++){
+      li_list[i].className = "";
+  }
+  li_list[idx].className = "active";
+
+  console.log("currentSceneId:", currentSceneId);
+  console.log("idx:", idx);
+
+  let video_bonn = document.getElementById("video_bonn");
+  let progressBar_bonn = document.getElementById("video_progress_bonn");
+
+  let previousTime = video_bonn.currentTime;  // Save the current playback time
+  console.log("Previous Time:", previousTime);
+
+  currentSceneId = sceneid
+  currentEpoch= sceneButtonTextsVideo[currentSceneId][idx];
+  currentEpochId = idx;
+  console.log("currentEpoch:", currentEpoch);
+  console.log("currentEpochId:", currentEpochId);
+  //let video = document.getElementById("video_scene")
+  old_src = video_bonn.src;
+  console.log("Old Video Source:", old_src);  // Print old src
+  new_scr = old_src.split('/');
+  new_scr[new_scr.length-1] = currentEpoch + ".mp4";
+  new_video_dir = new_scr.join('/');
+  video_bonn.src = new_video_dir;
+
+  video_bonn.onloadedmetadata = function () {
+    video_bonn.currentTime = 0; //previousTime;  // Restore playback position
+    progressBar_bonn.value = 0; //previousTime;  // Sync progress bar
+    progressBar_bonn.max = video_bonn.duration;  // Update progress bar range
+    video_bonn.play();  // Auto-play the new video 
+  };
+
+  console.log("New Video Source:", new_video_dir);
+
 }
 
 function ChangeEpochImage(idx){

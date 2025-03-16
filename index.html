@@ -6,7 +6,7 @@
         content="CVPR Paper">
   <meta name="keywords" content="3D Gaussian Splatting, 3D Reconstruction">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SplatSDF</title>
+  <title>Paper Title</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -55,20 +55,27 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">SplatSDF: Boosting Neural Implicit SDF via Gaussian Splatting Fusion</h1>
+          <h1 class="title is-1 publication-title">DynaGSLAM: Real-Time Gaussian-Splatting SLAM for Online Rendering, Tracking, 
+            Motion Predictions of Moving Objects in Dynamic Scenes</h1>
           <div class="is-size-3 publication-authors">
             <span class="author-block">
-              <a href="https://blarklee.github.io/" style="font-size: 20px;">Runfa Blark Li<sup>*</sup><sup>&dagger;</sup></a>, 
+              <a href="" style="font-size: 20px;">Runfa Blark Li<sup>*</sup><sup>&dagger;</sup></a>, 
+              <a href="" style="font-size: 20px;">Mahdi Shaghaghi<sup>&dagger;</sup></a>, 
               <a href="" style="font-size: 20px;">Keito Suzuki<sup>*</sup></a>, 
+              <a href="" style="font-size: 20px;">Xinshuang Liu<sup>*</sup></a>, 
+              <a href="" style="font-size: 20px;">Varun Moparthi<sup>*</sup></a>, 
               <a href="" style="font-size: 20px;">Bang Du<sup>*</sup></a>, 
-              <a href="" style="font-size: 20px;">Ki Myung Brian Lee<sup>&dagger;</sup></a>, 
-              <a href="https://natanaso.github.io/" style="font-size: 20px;">Nikolay Atanasov<sup>&dagger;</sup></a>,
-              <a href="https://sites.google.com/view/ucsdvpl/" style="font-size: 20px;">Truong Nguyen<sup>*</sup></a>
+              <a href="" style="font-size: 20px;">Walker Curtis<sup>&dagger;</sup></a>, 
+              <a href="" style="font-size: 20px;">Martin Renschler<sup>&dagger;</sup></a>, 
+              <a href="" style="font-size: 20px;">Ki Myung Brian Lee<sup>*</sup></a>, 
+              <a href="" style="font-size: 20px;">Nikolay Atanasov<sup>*</sup></a>,
+              <a href="" style="font-size: 20px;">Truong Nguyen<sup>*</sup></a>
               <!--HAHA<sup>1</sup>, HAHA<sup>1</sup>, HAHA<sup>1</sup>--> </span> 
           </div>
 
-          <div class="is-size-4 publication-authors">
-            <span class="author-block"><sup>*</sup>Video Processing Lab & <sup>&dagger;</sup>Existential Robotics Lab, UC San Diego</span>
+          <div class="is-size-3 publication-authors">
+            <span class="author-block"><sup>*</sup>UC San Diego</span>, 
+            <span class="author-block"><sup>&dagger;</sup>Qualcomm XR Advanced Technology</span>
           </div>
 
           <div class="column has-text-centered">
@@ -76,7 +83,7 @@
               <!-- PDF Link. -->
               <span class="link-block">
                 <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
+                   class="external-link button is-large is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
@@ -84,8 +91,8 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2411.15468"
-                   class="external-link button is-normal is-rounded is-dark">
+                <a href=""
+                   class="external-link button is-large is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
                   </span>
@@ -105,8 +112,8 @@
               -->
               <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/BlarkLee/SplatSDF_official"
-                   class="external-link button is-normal is-rounded is-dark">
+                <a href="https://github.com/BlarkLee/DynaGSLAM_official.git"
+                   class="external-link button is-large is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
@@ -131,119 +138,102 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            A signed distance function (SDF) is a useful representation for continuous-space geometry and many related operations, 
-            including rendering, collision checking, and mesh generation. Hence, reconstructing SDF from image observations 
-            accurately and efficiently is a fundamental problem. Recently, neural implicit SDF (SDF-NeRF) techniques, 
-            trained using volumetric rendering, have gained a lot of attention. Compared to earlier truncated SDF (TSDF) 
-            fusion algorithms that rely on depth maps and voxelize continuous space, SDF-NeRF enables continuous-space SDF 
-            reconstruction with better geometric and photometric accuracy. However, the accuracy and convergence speed of 
-            scene-level SDF reconstruction require further improvements for many applications. With the advent of 3D Gaussian 
-            Splatting (3DGS) as an explicit representation with excellent rendering quality and speed, several works have focused 
-            on improving SDF-NeRF by introducing consistency losses on depth and surface normals between 3DGS and SDF-NeRF. However, 
-            loss-level connections alone lead to incremental improvements. We propose a novel neural implicit SDF called "SplatSDF" 
-            to fuse 3DGS and SDF-NeRF at an architecture level with significant boosts to geometric and photometric accuracy and 
-            convergence speed. Our SplatSDF relies on 3DGS as input <em>only during training</em>, and keeps the same complexity and 
-            efficiency as the original SDF-NeRF during inference. Our method outperforms state-of-the-art SDF-NeRF models on 
-            geometric and photometric evaluation by the time of submission.
+            Simultaneous Localization and Mapping (SLAM) is one of the most important environment-perception and navigation 
+            algorithms for computer vision, robotics, and autonomous cars/drones. Hence, high quality and fast mapping becomes 
+            a fundamental problem. With the advent of 3D Gaussian Splatting (3DGS) as an explicit representation with excellent 
+            rendering quality and speed, state-of-the-art (SOTA) works introduce GS to SLAM. Compared to classical pointcloud-SLAM, 
+            GS-SLAM generates photometric information by learning from input camera views and synthesize unseen views with high-quality 
+            textures. However, these GS-SLAM fail when moving objects occupy the scene that violate the static assumption of bundle 
+            adjustment. The failed updates of moving GS affects the static GS and contaminates the full map over long frames. 
+            Although some efforts have been made by concurrent works to consider moving objects for GS-SLAM, they simply detect 
+            and remove the moving regions from GS rendering ("anti" dynamic GS-SLAM), where only the static background could benefit 
+            from GS. To this end, we propose the first real-time GS-SLAM, "DynaGSLAM", that achieves high-quality online GS rendering, 
+            tracking, motion predictions of moving objects in dynamic scenes while jointly estimating accurate ego motion. 
+            Our DynaGSLAM outperforms SOTA static & "Anti" dynamic GS-SLAM on three dynamic real datasets, while keeping speed and 
+            memory efficiency in practice.
           </p>
         </div>
       </div>
     </div>
-    <!--/ Abstract. -->
+
+    <!--/ Overview. -->
+
+
 
     <center>
-      <h2 class="title is-3">Results</h2>
-      <h2 class="subtitle is-4"> Scene </h2>
-      <ul class="nav nav-pills nav-justified" id="scene-result-view-ul" style="width: 60%">
-        <li role="presentation" class="active"><a href="javascript: void(0);"
-            onclick="ChangeScene(0);">Lego</a>
-        </li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeScene(1);">Ship</a></li>
-      </ul>
+        <h2 class="title is-2">Overview</h2>
+        <div class="content has-text-justified">
+            <div class="content has-text-justified">
+                <p>
+                    We focus on three modules - Dynamic GS (a) Segmentation & Flow, (b) Management and (c) Tracking & Prediction. 
+                    DynaGSLAM takes RGBD sequence as input to construct map with GS, (a) segment dynamic GS from static GS in 3D, 
+                    and estimate dynamic GS 3D motion flow between frames. (b) Dynamic GS are managed separately from static GS 
+                    with GS flow, but combined to jointly optimize. Case 1&2 are the rules for dynamic GS adding; "Cond. 1&2" denotes 
+                    the conditions for dynamic GS deletion. (c) The optimized dynamic GS at current and past frames are used to 
+                    interpolate/extrapolate dynamic GS in the continuous timeline from past to future. "CHS" refers to "cubic 
+                    Hermite spline" and "LF" refers to "linear function". Please refer to the paper for details.
+                </p>
+              </div>
+              <div class="b-dics" style="float: center">
+                <img id="overview" src="./pipeline.png", class="img-spacing">
+              </div>
+          </div>
 
-      <h2 class="subtitle is-4"> Epochs </h2>
-      <ul class="nav nav-pills nav-justified" id="image-result-view-ul" style="width: 60%">
-        <li role="presentation" class="active"><a href="javascript: void(0);"
-            onclick="ChangeEpochImage(0);">500</a>
-        </li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpochImage(1);">1000</a></li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpochImage(2);">1500</a></li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpochImage(3);">2000</a></li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpochImage(4);">2500</a></li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpochImage(5);">3000</a></li>
-      </ul>
 
-      <div class="content has-text-justified">
-        <div class="b-dics" style="float: center">
-          <img id="scene-image-neuralangelo" src="./static/results/lego/image/neuralangelo/500.png" alt="Neuralangelo" />
-          <img id="scene-image-ours" src="./static/results/lego/image/ours/500.png" alt="SplatSDF" />
-        </div>
-      </div>
 
-      <h2 class="subtitle is-4"> Epochs </h2>
+
+    <center>
+      <h2 class="title is-2">Results</h2>
+      <h2 class="subtitle is-3"> TUM Dataset </h2>
       <ul class="nav nav-pills nav-justified" id="video-result-view-ul" style="width: 60%">
         <li role="presentation" class="active"><a href="javascript: void(0);"
-            onclick="ChangeEpoch(0);">500</a>
+            onclick="ChangeEpoch(0,0);">fr3_walking_xyz</a>
         </li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch(1);">1000</a></li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch(2);">1500</a></li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch(3);">2000</a></li>
-        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch(4);">3000</a></li>
+        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch(0,1);">fr3_walking_static</a></li>
+        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch(0,2);">fr3_walking_rpy</a></li>
+        <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch(0,3);">fr3_walking_halfsphere</a></li>
       </ul>
       
         <div>
-          <video class="video" id="video_scene" loop playsinline autoPlay muted
-          src="./static/results/lego/video/500.mp4" onplay="resizeAndPlay(this)"></video>
-          <canvas class="videoMerge" id="video_scene_merge"></canvas>
+          <!--video class="video" id="video_scene" loop playsinline autoPlay muted
+          src="./static/results/lego/video/500.mp4" onplay="resizeAndPlay(this)"></video-->
+          <video class="video" id="video_tum" loop playsinline autoPlay muted
+          src="./static/results/tum/video/walking_xyz.mp4"></video>
+          <button id="play_pause_btn_tum">Play</button>
+          <input type="range" id="video_progress_tum" value="0" min="0" step="0.1">
+          <!--canvas class="videoMerge" id="video_scene_merge"></canvas-->
         </div>
 
-        <h2 class="subtitle is-3"> 3D Model Comparison </h2>
-        <div class="grid-container-2">
-          <div class="model-block">
-            <p class="myprompt nerf_text"> Neuralangelo</p>
-            <model-viewer 
-              src="./static/results/lego/mesh/neuralangelo.glb"
-              id="mesh-neuralangelo"
-              alt="3D model reconstructed with Neuralangelo"
-              exposure="1.0"
-              auto-rotate
-              camera-controls
-              shadow-intensity="1"
-              style="width: 100%; height: 500px; background-color: #000000">
-            </model-viewer>
-          </div>
 
-          <div class="model-block">
-            <p class="myprompt nerf_text"> Ours</p>
-            <model-viewer 
-              src="./static/results/lego/mesh/ours.glb"
-              id="mesh-ours"
-              alt="3D model reconstructed with our method"
-              exposure="1.0"
-              auto-rotate
-              camera-controls
-              shadow-intensity="1"
-              style="width: 100%; height: 500px; background-color: #000000">
-            </model-viewer>
+        <h2 class="subtitle is-3"> Bonn Dataset </h2>
+        <ul class="nav nav-pills nav-justified" id="video-result-view-ul-bonn" style="width: 60%">
+          <li role="presentation" class="active"><a href="javascript: void(0);"
+              onclick="ChangeEpoch2(1,0);">balloon</a>
+          </li>
+          <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch2(1,1);">balloon2</a></li>
+          <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch2(1,2);">ps_track</a></li>
+          <li role="presentation"><a href="javascript: void(0);" onclick="ChangeEpoch2(1,3);">ps_track2</a></li>
+        </ul>
+        
+          <div>
+            <!--video class="video" id="video_scene" loop playsinline autoPlay muted
+            src="./static/results/lego/video/500.mp4" onplay="resizeAndPlay(this)"></video-->
+            <video class="video" id="video_bonn" loop playsinline autoPlay muted
+            src="./static/results/bonn/video/balloon.mp4"></video>
+            <button id="play_pause_btn_bonn">Play</button>
+            <input type="range" id="video_progress_bonn" value="0" min="0" step="0.1">
+            <!--canvas class="videoMerge" id="video_scene_merge"></canvas-->
           </div>
-        </div>
-      
-    </center>
-  
-  </div>
 </section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{splatsdf,
-      title={SplatSDF: Boosting Neural Implicit SDF via Gaussian Splatting Fusion}, 
-      author={Runfa Blark Li, Keito Suzuki, Bang Du, Ki Myung Brian Lee, Nikolay Atanasov and Truong Nguyen},
-      year={2024},
-      eprint={2411.15468},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2411.15468}, 
+    <pre><code>@article{,
+  author    = {},
+  title     = {},
+  journal   = {},
+  year      = {},
 }</code></pre>
   </div>
 </section>
